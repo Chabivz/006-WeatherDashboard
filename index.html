@@ -1,18 +1,132 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="./Assets/CSS/Style.css">
-    </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="stylesheet" href="./Assets/CSS/style.css">
+</head>
+<body>
+<header>
 
-    <body>
-        <header>
+</header>
+  <main class="flex row justify-content-start">
+<!-- Navigation Bar -->
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Weather Dashboard</a>
+  </div>
+</nav>
 
-        </header>
-        <main>
+<ul class="list-group">
+  <li class="list-group-item disabled" aria-disabled="true">Search for a City:</li>
+  <li class="list-group-item"><input type="text" class="form-control" placeholder="City" aria-label="City" aria-describedby="basic-addon1" id="txt-search"></li>
+  <!-- Search Button -->
+  <li class="list-group-item"><button type="button" class="btn btn-primary btn-sm" id="btn-search">Search</button></li>
+  <hr>
+  <!-- List of Cities -->
+  <li class="list-group-item"><button value="Austin" id="btn-Austin" type="button" class="btn history-btn btn-secondary btn-sm">Austin</button></li>
+  <li class="list-group-item"><button value="Chicago" id="btn-Chicago" type="button" class="btn history-btn btn-secondary btn-sm">Chicago</button></li>
+  <li class="list-group-item"><button value="New York" id="btn-NewYork" type="button" class="btn history-btn btn-secondary btn-sm">New York</button></li>
+  <li class="list-group-item"><button value="Orlando" id="btn-Orlando" type="button" class="btn history-btn btn-secondary btn-sm">Orlando</button></li>
+  <li class="list-group-item"><button value="San Francisco" id="btn-SanFrancisco" type="button" class="btn history-btn btn-secondary btn-sm">San Francisco</button></li>
+  <li class="list-group-item"><button value="Seattle" id="btn-Seattle" type="button" class="btn history-btn btn-secondary btn-sm">Seattle</button></li>
+  <li class="list-group-item"><button value="Denver" id="btn-Denver" type="button" class="btn history-btn btn-secondary btn-sm">Denver</button></li>
+  <li class="list-group-item"><button value="Atlanta" id="btn-Atlanta" type="button" class="btn history-btn btn-secondary btn-sm">Atlanta</button></li>
+</ul>
 
-            
-        </main>  
-        <footer>
+<!-- Card City -->
+<div id="card-weather" class="card city justify-content-between p-2 bd-highlight" ></div>
+  <!-- <div class="card-body">
+    <h5 class="card-title" id="result-city"></h5>
+    <h6 class="card-subtitle mb-2 text-muted" id="result-date"></h6>
+    <p class="card-text">Temp: <span id="result-temp"></span></p>
+    <p class="card-text">Wind: <span id="result-wind"></span></p>
+    <p class="card-text">Humidity: <span id="result-humidity"></span> </p>
+    
+    
+  </div> -->
 
-        </footer>
-    </body>
+  <!-- <p class="fs-1 p-2">5-Day Forecast</p>
+<div class="d-flex justify-content-around weather-card-container">
+
+<div class="card text-center weather-card">
+  <div class="card-header">
+    Date
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Weather Icon</h5>
+    <p class="card-text">Temp: </p>
+    <p class="card-text">Wind: </p>
+    <p class="card-text">Humidity:  </p>
+  </div>
+</div>
+
+<div class="card text-center weather-card">
+  <div class="card-header">
+    Date
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Weather Icon</h5>
+    <p class="card-text">Temp: </p>
+    <p class="card-text">Wind: </p>
+    <p class="card-text">Humidity:  </p>
+  </div>
+</div>
+
+<div class="card text-center weather-card">
+  <div class="card-header">
+    Date
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Weather Icon</h5>
+    <p class="card-text">Temp: </p>
+    <p class="card-text">Wind: </p>
+    <p class="card-text">Humidity:  </p>
+  </div>
+</div>
+
+<div class="card text-center weather-card">
+  <div class="card-header">
+    Date
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Weather Icon</h5>
+    <p class="card-text">Temp: </p>
+    <p class="card-text">Wind: </p>
+    <p class="card-text">Humidity:  </p>
+  </div>
+</div>
+
+<div class="card text-center weather-card">
+  <div class="card-header">
+    Date
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Weather Icon</h5>
+    <p class="card-text">Temp: </p>
+    <p class="card-text">Wind: </p>
+    <p class="card-text">Humidity:  </p>
+  </div>
+</div> -->
+<!-- </div> -->
+
+
+</div>
+
+
+
+
+<!-- Div 5 week forecast -->
+
+  </main>
+<footer>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<script type="text/JavaScript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script type="text/JavaScript" src="./Assets/JavaScript/script.js"></script>
+
+</body>
 </html>
