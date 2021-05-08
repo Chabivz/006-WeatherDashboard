@@ -1,11 +1,5 @@
-# 006-WeatherDashboard
+# Project 006 : Weather Dashboard
+
+The Weather dashboard is a tool for all users to give the weather update for the selected city. The dashboard will display the 
 
 ##
-
-##
-
-## Github Links 
-
-(Website link) [https://chabivz.github.io/006-WeatherDashboard/]
-
-(Github Repo Link) [https://github.com/Chabivz/006-WeatherDashboard]
