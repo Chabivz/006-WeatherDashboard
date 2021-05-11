@@ -14,7 +14,7 @@ body {
 }
 
 #card-weather {
-  order: 0;
+  order: 1;
   width: 78%;
   visibility: hidden;
   opacity: 85%;
