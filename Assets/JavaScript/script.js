@@ -1,12 +1,8 @@
 // Variables
-
 const today = moment().format('dddd, MMM Do YYYY');
 
-
 $(".history-btn").on('click', function() {
-  
   const text = $(this).text();
-
   searchApi(text);
 })
 
@@ -24,14 +20,6 @@ $('#btn-search').on('click', function() {
   searchApi(searchVal);
   searchForcastApi(searchVal);
 })
-
-// 
-function cityFunction(event) {
-  event.preventDefault();
-  
-  let txtSearchEl = cityButtonsEl.val(); 
-  console.log(txtSearchEl);
-}
 
 
 // Generate Cards
@@ -80,14 +68,21 @@ function secondFetch(txtSearchEl) {
     .then(data => { 
       // Clearing data before searching again
       $('#five-day-forecast').empty();
-
-      let cardForecastDiv = $('<div>').addClass('d-flex justify-content-end align-self-start');
-
-
+      let fiveDayP = $('<p>').addClass('fiveDayP').text("5-Day Forecast: ")
+      let cardForecastDiv = $('<div>').addClass('d-flex col justify-content-around align-self-baseline');
+      let weatherStorage = JSON.parse(localStorage.getItem("weatherStorage")) || [];
+  // let weatherData = JSON.parse(data.content);
       for ( let x = 0; x <= 40 ; x+=8) {
+        
+        let newWeather = {
+          temp: weatherData.list[x].main.temp,
+          wind: weatherData.list[x].wind.speed,
+          humid: weatherData.list[x].main.humidity,
+          icon: weatherData.list[x].weather[0].icon,
+          date: weatherData.list[x].dt_txt
+        }
+        weatherStorage.push(newWeather);
       let date = data.list[x].dt_txt.split(' ')[0];
-      console.log(date);
-
       let cardForecast = $('<div>').addClass('cards card');
       let dateForecast = $('<h5>').addClass('card-today-forecast').text(`${date}`);
       let tempForecast = $('<p>').addClass('card-temp').text(`Temp: ${data.list[x].main.temp}°F`);

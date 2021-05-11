@@ -1,26 +1,11 @@
 .list-group {
-  width: 20%;
+  width: 18%;
   padding-left: 35px;
 }
 
 .btn {
   width: 100%;
 }
-
-/* .city {
-  width: 80%;
-  height: 50%;
-}
-
-.weather-card {
-  width: 15%;
-  height: 20%;
-}
-
-.weather-card-container {
-  width: 100%;
-  height: 250px;
-} */
 
 body {
   background: rgb(78,69,126);
@@ -32,7 +17,7 @@ body {
   /* visibility: hidden; */
   opacity: 85%;
   background-color: aquamarine;
-height: 300px;
+  height: 25%;
 }
 .valid-input {
   color: red;
@@ -44,16 +29,6 @@ height: 300px;
   height: 100px;
 }
 
-#forecast-container {
-  opacity: 85%;
-  width: 79%;
-  /* visibility: hidden; */
-  height: 300px;
-  background-color: aquamarine;
-  padding-top: 10px;
-  
-}
-
 #forecast-div {
   width: 50%;
   /* visibility: hidden; */
@@ -62,9 +37,10 @@ height: 300px;
 
 }
 
-.five-day-forecast {
-  width: 70%;
-height: 20%;
+#five-day-forecast {
+  width: 900px;
+
+height: 15%;
 }
 
 .card-body {
@@ -72,5 +48,7 @@ height: 20%;
 }
 
 .cards {
-  padding-top: -100px;
+  width: 150px;
+  opacity: 85%;
+  background-color: aquamarine;
 }
