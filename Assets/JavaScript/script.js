@@ -70,15 +70,17 @@ function secondFetch(txtSearchEl) {
       $('#five-day-forecast').empty();
       let fiveDayP = $('<p>').addClass('fiveDayP').text("5-Day Forecast: ")
       let cardForecastDiv = $('<div>').addClass('d-flex width justify-content-around align-self-start');
-      $('#card-weather').append(fiveDayP);
+      let hrEl = $('<hr>').addClass('').text("")
+      $('#card-weather').append(hrEl, fiveDayP);
       for ( let x = 3 ; x <= 40 ; x+=8) {
         
       let dateWeather = new Date(data.list[x].dt_txt).toLocaleString();
+      dateWeather = dateWeather.split(',')[0];
       let cardForecast = $('<div>').addClass('cards');
       let dateForecast = $('<h5>').addClass('card-today-forecast').text(`${dateWeather}`);
       let tempForecast = $('<p>').addClass('card-temp').text(`Temp: ${data.list[x].main.temp}°F`);
       let windForecast = $('<p>').addClass('card-wind').text(`Wind: ${data.list[x].wind.speed}M/H`);
-      let humidForecast = $('<p>').addClass('card-humid').text(`Humid: ${data.list[x].main.humidity}%`);
+      let humidForecast = $('<p>').addClass('card-humid').text(`Humidity: ${data.list[x].main.humidity}%`);
       let iconForecast = $('<img>').addClass('card-icon').attr({ src: `./Assets/Images/${data.list[x].weather[0].icon}.png` });
 
       cardForecast.append(dateForecast,iconForecast, tempForecast, windForecast, humidForecast);
