@@ -18,7 +18,7 @@ $('#btn-search').on('click', function() {
   }
 
   searchApi(searchVal);
-  searchForcastApi(searchVal);
+  secondFetch(searchVal);
 })
 
 
@@ -70,21 +70,29 @@ function secondFetch(txtSearchEl) {
       $('#five-day-forecast').empty();
       let fiveDayP = $('<p>').addClass('fiveDayP').text("5-Day Forecast: ")
       let cardForecastDiv = $('<div>').addClass('d-flex col justify-content-around align-self-baseline');
-      let weatherStorage = JSON.parse(localStorage.getItem("weatherStorage")) || [];
-  // let weatherData = JSON.parse(data.content);
-      for ( let x = 0; x <= 40 ; x+=8) {
+      // let weatherStorage = JSON.parse(localStorage.getItem("weatherStorage")) || [];
+      // let weatherData = JSON.parse(data.content);
+      for ( let x = 3 ; x <= 40 ; x+=8) {
         
-        let newWeather = {
-          temp: weatherData.list[x].main.temp,
-          wind: weatherData.list[x].wind.speed,
-          humid: weatherData.list[x].main.humidity,
-          icon: weatherData.list[x].weather[0].icon,
-          date: weatherData.list[x].dt_txt
-        }
-        weatherStorage.push(newWeather);
-      let date = data.list[x].dt_txt.split(' ')[0];
+        // let newWeather = {
+        //   temp: weatherData.list[x].main.temp,
+        //   wind: weatherData.list[x].wind.speed,
+        //   humid: weatherData.list[x].main.humidity,
+        //   icon: weatherData.list[x].weather[0].icon,
+        //   date: weatherData.list[x].dt_txt
+        // }
+        // weatherStorage.push(newWeather);
+
+      console.log(data.list[x]);
+            // let date = data.list[x].dt_txt.split(' ')[0];
+            // let date = data.list[x].dt_txt.split(' ')[0];
+      let dateWeather = new Date(data.list[x].dt_txt).toLocaleString();
+      console.log(data.list[x]);
       let cardForecast = $('<div>').addClass('cards card');
-      let dateForecast = $('<h5>').addClass('card-today-forecast').text(`${date}`);
+      let dateForecast = $('<h5>').addClass('card-today-forecast').text(`${dateWeather}`);
+      // let dateWeather = new Date(dateForecast)
+
+
       let tempForecast = $('<p>').addClass('card-temp').text(`Temp: ${data.list[x].main.temp}°F`);
       let windForecast = $('<p>').addClass('card-wind').text(`Wind: ${data.list[x].wind.speed}M/H`);
       let humidForecast = $('<p>').addClass('card-humid').text(`Humid: ${data.list[x].main.humidity}%`);
