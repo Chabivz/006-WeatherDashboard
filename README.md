@@ -34,10 +34,6 @@
 Weather Dashboard Image Layout \
 ![Weather Dashboard](Assets/Images/1.png) \
 
-
-Weather Dashboard Image Layout \
-![Weather Dashboard](Assets/Images/1.png) \
-
 Weather Dashboard Forecast Display \
 ![Weather Dashboard](Assets/Images/2.png) \
 
