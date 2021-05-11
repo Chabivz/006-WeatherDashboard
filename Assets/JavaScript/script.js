@@ -18,13 +18,11 @@ $('#btn-search').on('click', function() {
   }
 
   searchApi(searchVal);
-  secondFetch(searchVal);
+  // secondFetch(searchVal);
 })
-
 
 // Generate Cards
 function searchApi(txtSearchEl) {
-  
 
   const request = `http://api.openweathermap.org/data/2.5/forecast?q=${txtSearchEl}&units=imperial&appid=904d57a990eb1f14578feeb79ec45ef2`;
   $('#card-weather').css('visibility', 'visible');
@@ -35,7 +33,6 @@ function searchApi(txtSearchEl) {
     .then(data => { 
       // Clearing data before searching again
       $('#card-weather').empty();
-      // $('#weather-forecast').empty();
 
       let card = $('<div>').addClass('card-body');
       let cardCity = $('<h2>').addClass('card-city').text(`${data.city.name}`);
@@ -60,39 +57,25 @@ function searchApi(txtSearchEl) {
 
 function secondFetch(txtSearchEl) {
   const request = `http://api.openweathermap.org/data/2.5/forecast?q=${txtSearchEl}&units=imperial&appid=904d57a990eb1f14578feeb79ec45ef2`;
+  $('#card-weather').css('visibility', 'visible');
   $('#five-day-forecast').css('visibility', 'visible');
-
+  $('#card-weather').empty();
   fetch(request)
     .then(res => res.json()) 
+    
+
 
     .then(data => { 
       // Clearing data before searching again
       $('#five-day-forecast').empty();
       let fiveDayP = $('<p>').addClass('fiveDayP').text("5-Day Forecast: ")
-      let cardForecastDiv = $('<div>').addClass('d-flex col justify-content-around align-self-baseline');
-      // let weatherStorage = JSON.parse(localStorage.getItem("weatherStorage")) || [];
-      // let weatherData = JSON.parse(data.content);
+      let cardForecastDiv = $('<div>').addClass('d-flex width justify-content-around align-self-start');
+      $('#card-weather').append(fiveDayP);
       for ( let x = 3 ; x <= 40 ; x+=8) {
         
-        // let newWeather = {
-        //   temp: weatherData.list[x].main.temp,
-        //   wind: weatherData.list[x].wind.speed,
-        //   humid: weatherData.list[x].main.humidity,
-        //   icon: weatherData.list[x].weather[0].icon,
-        //   date: weatherData.list[x].dt_txt
-        // }
-        // weatherStorage.push(newWeather);
-
-      console.log(data.list[x]);
-            // let date = data.list[x].dt_txt.split(' ')[0];
-            // let date = data.list[x].dt_txt.split(' ')[0];
       let dateWeather = new Date(data.list[x].dt_txt).toLocaleString();
-      console.log(data.list[x]);
-      let cardForecast = $('<div>').addClass('cards card');
+      let cardForecast = $('<div>').addClass('cards');
       let dateForecast = $('<h5>').addClass('card-today-forecast').text(`${dateWeather}`);
-      // let dateWeather = new Date(dateForecast)
-
-
       let tempForecast = $('<p>').addClass('card-temp').text(`Temp: ${data.list[x].main.temp}°F`);
       let windForecast = $('<p>').addClass('card-wind').text(`Wind: ${data.list[x].wind.speed}M/H`);
       let humidForecast = $('<p>').addClass('card-humid').text(`Humid: ${data.list[x].main.humidity}%`);
@@ -101,14 +84,12 @@ function secondFetch(txtSearchEl) {
       cardForecast.append(dateForecast,iconForecast, tempForecast, windForecast, humidForecast);
       cardForecastDiv.append(cardForecast);
 
-      $('#five-day-forecast').append(cardForecastDiv);
+      $('#card-weather').append(cardForecastDiv);
   }
 })
     .catch(function (error) {
       console.error(error);
     });
-
-
 
   }
 

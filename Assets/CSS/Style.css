@@ -1,6 +1,7 @@
 .list-group {
   width: 18%;
   padding-left: 35px;
+  order: 1;
 }
 
 .btn {
@@ -13,8 +14,9 @@ body {
 }
 
 #card-weather {
+  order: 0;
   width: 78%;
-  /* visibility: hidden; */
+  visibility: hidden;
   opacity: 85%;
   background-color: aquamarine;
   height: 25%;
@@ -30,8 +32,7 @@ body {
 }
 
 #forecast-div {
-  width: 50%;
-  /* visibility: hidden; */
+  /* width: 50%; */
   opacity: 85%;
   background-color: aquamarine;
 
@@ -39,8 +40,9 @@ body {
 
 #five-day-forecast {
   width: 900px;
-
-height: 15%;
+  order: 2;
+  width: 79%%;
+  height: 15%;
 }
 
 .card-body {
@@ -51,4 +53,15 @@ height: 15%;
   width: 150px;
   opacity: 85%;
   background-color: aquamarine;
+}
+
+
+.width {
+  width: 100%;
+}
+
+.fiveDayP {
+  font-size: 30px;
+  padding-left: 20px;
+  font-weight: 500;
 }
