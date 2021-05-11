@@ -26,8 +26,19 @@
 
 ## Usage
 
+- Type the City on the search input and click search and it will show the weather forecast.
+- Click the listed city below Search button and it will show you the weather forecast.
 - Go to [Deployed Github Pages](https://chabivz.github.io/006-WeatherDashboard/)
 
 
+Weather Dashboard Image Layout \
+![Weather Dashboard](Assets/Images/1.png) \
 
-## Credit
+
+Weather Dashboard Image Layout \
+![Weather Dashboard](Assets/Images/1.png) \
+
+Weather Dashboard Forecast Display \
+![Weather Dashboard](Assets/Images/2.png) \
+
+
