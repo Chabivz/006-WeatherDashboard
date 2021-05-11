@@ -3,11 +3,13 @@ const today = moment().format('dddd, MMM Do YYYY');
 
 $(".history-btn").on('click', function() {
   const text = $(this).text();
+  localStorage.clear();
   searchApi(text);
 })
 
 
 $('#btn-search').on('click', function() {
+  localStorage.clear();
   const searchVal = $('#txt-search').val()
   const validInput = $('<span>').addClass('valid-input').text(`Please enter a valid input`);
   $('.valid-input').remove();
@@ -72,10 +74,32 @@ function secondFetch(txtSearchEl) {
       let cardForecastDiv = $('<div>').addClass('d-flex width justify-content-around align-self-start');
       let hrEl = $('<hr>').addClass('').text("")
       $('#card-weather').append(hrEl, fiveDayP);
-      for ( let x = 3 ; x <= 40 ; x+=8) {
-        
+      let weatherLocalStorage = JSON.parse(localStorage.getItem("weatherLocalStorage")) || [];
+      
+      
+
+
+      for ( let x = 4  ; x <= 40 ; x+=8) {
       let dateWeather = new Date(data.list[x].dt_txt).toLocaleString();
-      dateWeather = dateWeather.split(',')[0];
+      // LocalStorage
+      let tempLS = data.list[x].main.temp;
+      let windLS = data.list[x].wind.speed;
+      let humidLS = data.list[x].main.humidity;
+      let iconLS = data.list[x].weather[0].icon;
+      let newForecastEl = {
+        temperature: tempLS,
+        wind: windLS,
+        humid: humidLS,
+        icon: iconLS,
+        time: dateWeather
+      };
+
+      weatherLocalStorage.push(newForecastEl);
+      localStorage.setItem('weatherLocalStorage',JSON.stringify(weatherLocalStorage));
+
+
+      // let dateWeather = new Date(data.list[x].dt_txt).toLocaleString();
+      // dateWeather = dateWeather.split(',')[0];
       let cardForecast = $('<div>').addClass('cards');
       let dateForecast = $('<h5>').addClass('card-today-forecast').text(`${dateWeather}`);
       let tempForecast = $('<p>').addClass('card-temp').text(`Temp: ${data.list[x].main.temp}°F`);
