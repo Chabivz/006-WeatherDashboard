@@ -24,7 +24,7 @@ $('#btn-search').on('click', function() {
 // Generate Cards
 function searchApi(txtSearchEl) {
 
-  const request = `http://api.openweathermap.org/data/2.5/forecast?q=${txtSearchEl}&units=imperial&appid=904d57a990eb1f14578feeb79ec45ef2`;
+  const request = `https://api.openweathermap.org/data/2.5/forecast?q=${txtSearchEl}&units=imperial&appid=904d57a990eb1f14578feeb79ec45ef2`;
   $('#card-weather').css('visibility', 'visible');
 
   fetch(request)
@@ -56,7 +56,7 @@ function searchApi(txtSearchEl) {
 }
 
 function secondFetch(txtSearchEl) {
-  const request = `http://api.openweathermap.org/data/2.5/forecast?q=${txtSearchEl}&units=imperial&appid=904d57a990eb1f14578feeb79ec45ef2`;
+  const request = `https://api.openweathermap.org/data/2.5/forecast?q=${txtSearchEl}&units=imperial&appid=904d57a990eb1f14578feeb79ec45ef2`;
   $('#card-weather').css('visibility', 'visible');
   $('#five-day-forecast').css('visibility', 'visible');
   $('#card-weather').empty();
