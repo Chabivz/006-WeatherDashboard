@@ -5,7 +5,9 @@ $(".history-btn").on('click', function() {
   const text = $(this).text();
   localStorage.clear();
   searchApi(text);
-})
+  saveToHistory(text);
+  
+});
 
 
 $('#btn-search').on('click', function() {
@@ -21,17 +23,63 @@ $('#btn-search').on('click', function() {
 
   searchApi(searchVal);
   // secondFetch(searchVal);
-})
+});
+
+
+// SECOND API FOR UV
+
+function uvDisplay(txtSearchEl) {
+  const request = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${txtSearchEl}?unitGroup=us&key=LN5SPL4X8SJDJALJ9THXY4WDC`;
+
+  fetch(request)
+    .then(res => res.json()) 
+    
+    .then(data => { 
+      // Clearing data before searching again
+      $('.card-uv').empty();
+      let uvIndex = $('<p>').addClass('card-uv').text(`UV: ${data.days[0].uvindex}`)
+      // console.log(data.days[0].uvindex);
+      $('.card-body').append(uvIndex)
+      let uvGrade = data.days[0].uvindex;
+      let uvClass = $('.card-uv');
+
+      if (uvGrade <= 2) {
+        console.log('green');
+        uvClass.style.background = "green";
+      } else if (uvGrade <= 4) {
+        console.log('Yellow');
+      } else if (uvGrade <= 6) {
+        console.log('Orange');
+      } else if (uvGrade <= 8) {
+        console.log('Red');
+      } else if (uvGrade <= 10) {
+        console.log('Puelw');
+      } else {
+        console.log("Are you stil alive?  ")
+      }
+
+      
+
+  })
+
+    .catch(function (error) {
+      console.error(error);
+    });
+
+}
+
+
+
 
 // Generate Cards
 function searchApi(txtSearchEl) {
-
+  
   const request = `https://api.openweathermap.org/data/2.5/forecast?q=${txtSearchEl}&units=imperial&appid=904d57a990eb1f14578feeb79ec45ef2`;
   $('#card-weather').css('visibility', 'visible');
 
   fetch(request)
     .then(res => res.json()) 
-
+    
     .then(data => { 
       // Clearing data before searching again
       $('#card-weather').empty();
@@ -59,6 +107,7 @@ function searchApi(txtSearchEl) {
 
 function secondFetch(txtSearchEl) {
   const request = `https://api.openweathermap.org/data/2.5/forecast?q=${txtSearchEl}&units=imperial&appid=904d57a990eb1f14578feeb79ec45ef2`;
+  $('#five-day-forecast').empty();
   $('#card-weather').css('visibility', 'visible');
   $('#five-day-forecast').css('visibility', 'visible');
   $('#card-weather').empty();
@@ -74,30 +123,11 @@ function secondFetch(txtSearchEl) {
       let cardForecastDiv = $('<div>').addClass('d-flex width justify-content-around align-self-start');
       let hrEl = $('<hr>').addClass('').text("")
       $('#card-weather').append(hrEl, fiveDayP);
-      let weatherLocalStorage = JSON.parse(localStorage.getItem("weatherLocalStorage")) || [];
+      // let weatherLocalStorage = JSON.parse(localStorage.getItem("weatherLocalStorage")) || [];
       
-      
-
-
       for ( let x = 2  ; x <= 40 ; x+=8) {
       let dateWeather = new Date(data.list[x].dt_txt).toLocaleString();
-      // LocalStorage
-      let tempLS = data.list[x].main.temp;
-      let windLS = data.list[x].wind.speed;
-      let humidLS = data.list[x].main.humidity;
-      let iconLS = data.list[x].weather[0].icon;
-      let newForecastEl = {
-        temperature: tempLS,
-        wind: windLS,
-        humid: humidLS,
-        icon: iconLS,
-        time: dateWeather
-      };
-
-      weatherLocalStorage.push(newForecastEl);
-      localStorage.setItem('weatherLocalStorage',JSON.stringify(weatherLocalStorage));
-
-
+    
       // let dateWeather = new Date(data.list[x].dt_txt).toLocaleString();
       // dateWeather = dateWeather.split(',')[0];
       let cardForecast = $('<div>').addClass('cards');
@@ -111,12 +141,14 @@ function secondFetch(txtSearchEl) {
       cardForecastDiv.append(cardForecast);
 
       $('#card-weather').append(cardForecastDiv);
+      
   }
+  uvDisplay(txtSearchEl);
 })
     .catch(function (error) {
       console.error(error);
     });
-
+    
   }
 
 // Check if search has a valid input
@@ -130,4 +162,40 @@ function validInput() {
   }
 
   searchApi(txtSearchEl);
+  saveToHistory(txtSearchEl);
 }
+
+//Save to search to local storage
+
+function saveToHistory(txtSearchEl) {
+
+  let historyLS = JSON.parse(localStorage.getItem("historyLS")) || [];
+  let cityEl = txtSearchEl;
+
+  let newHistory = {
+    city: cityEl
+  };
+
+  historyLS.push(newHistory);
+  localStorage.setItem('historyLS',JSON.stringify(historyLS));
+
+}
+
+
+
+// Showing the last city when refreshed
+function onLoad() {
+  $('#card-weather').empty();
+  if (localStorage.getItem("historyLS") === null) {
+      return;
+  };
+
+  let historyLS = JSON.parse(localStorage.getItem("historyLS") || []);
+  let cityHistory = historyLS[0].city;
+  // console.log(cityHistory);
+  searchApi(cityHistory);
+
+}
+
+onLoad();
+
