@@ -79,7 +79,7 @@ function secondFetch(txtSearchEl) {
       
 
 
-      for ( let x = 4  ; x <= 40 ; x+=8) {
+      for ( let x = 2  ; x <= 40 ; x+=8) {
       let dateWeather = new Date(data.list[x].dt_txt).toLocaleString();
       // LocalStorage
       let tempLS = data.list[x].main.temp;
