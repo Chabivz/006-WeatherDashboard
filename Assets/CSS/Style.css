@@ -68,5 +68,9 @@ body {
 
 .card-uv {
   width: fit-content;
+  padding-left: 3px;
+  padding-right: 3px;
+  color: aliceblue;
+  border-radius: 5%;
   
 }

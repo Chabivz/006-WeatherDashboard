@@ -20,22 +20,20 @@ $('#btn-search').on('click', function() {
     $('.list-group').children().eq(2).append(validInput);
     return;
   }
-
+  saveToHistory(searchVal)
   searchApi(searchVal);
-  // secondFetch(searchVal);
 });
 
-
-// SECOND API FOR UV
-
+// UV API
 function uvDisplay(txtSearchEl) {
   const request = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${txtSearchEl}?unitGroup=us&key=LN5SPL4X8SJDJALJ9THXY4WDC`;
 
   fetch(request)
     .then(res => res.json()) 
-    
+
+
     .then(data => { 
-      // Clearing data before searching again
+      
       $('.card-uv').empty();
       let uvIndex = $('<p>').addClass('card-uv').text(`UV: ${data.days[0].uvindex}`)
       // console.log(data.days[0].uvindex);
@@ -44,22 +42,23 @@ function uvDisplay(txtSearchEl) {
       let uvClass = $('.card-uv');
 
       if (uvGrade <= 2) {
-        console.log('green');
-        uvClass.style.background = "green";
+        
+        uvClass.css('background', "#008000")  ;
       } else if (uvGrade <= 4) {
-        console.log('Yellow');
+        
+        uvClass.css('background', "#FFFF00");
       } else if (uvGrade <= 6) {
-        console.log('Orange');
+        
+        uvClass.css('background', "#FFA500");
       } else if (uvGrade <= 8) {
-        console.log('Red');
+        
+        uvClass.css('background', "#AA0000");
       } else if (uvGrade <= 10) {
-        console.log('Puelw');
+        
+        uvClass.css('background', "#800080");
       } else {
-        console.log("Are you stil alive?  ")
-      }
-
-      
-
+        
+      }   
   })
 
     .catch(function (error) {
@@ -117,19 +116,20 @@ function secondFetch(txtSearchEl) {
 
 
     .then(data => { 
-      // Clearing data before searching again
+    
       $('#five-day-forecast').empty();
       let fiveDayP = $('<p>').addClass('fiveDayP').text("5-Day Forecast: ")
       let cardForecastDiv = $('<div>').addClass('d-flex width justify-content-around align-self-start');
       let hrEl = $('<hr>').addClass('').text("")
       $('#card-weather').append(hrEl, fiveDayP);
-      // let weatherLocalStorage = JSON.parse(localStorage.getItem("weatherLocalStorage")) || [];
       
-      for ( let x = 2  ; x <= 40 ; x+=8) {
-      let dateWeather = new Date(data.list[x].dt_txt).toLocaleString();
-    
-      // let dateWeather = new Date(data.list[x].dt_txt).toLocaleString();
-      // dateWeather = dateWeather.split(',')[0];
+      for ( let x = 1  ; x <= 40 ; x+=8) {
+      
+      let dateWeather = new Date.parse(data.list[x].dt_txt).toString();
+      
+      dateWeather = dateWeather.split(' ').slice(1, 4).join(' ');
+
+
       let cardForecast = $('<div>').addClass('cards');
       let dateForecast = $('<h5>').addClass('card-today-forecast').text(`${dateWeather}`);
       let tempForecast = $('<p>').addClass('card-temp').text(`Temp: ${data.list[x].main.temp}°F`);
@@ -146,6 +146,9 @@ function secondFetch(txtSearchEl) {
   uvDisplay(txtSearchEl);
 })
     .catch(function (error) {
+      const validInput = $('<span>').addClass('valid-input').text(`Not A Valid City Please Try Again`);
+      $('.list-group').children().eq(2).append(validInput);
+      $('#five-day-forecast').css('visibility', 'hidden');
       console.error(error);
     });
     
@@ -158,6 +161,7 @@ function validInput() {
   txtSearchEl = txtSearchEl.value;
   if (!txtSearchEl) {
     console.error('Please enter a value.')
+
     return;
   }
 
