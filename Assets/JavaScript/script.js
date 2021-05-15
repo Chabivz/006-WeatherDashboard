@@ -123,7 +123,7 @@ function secondFetch(txtSearchEl) {
       let hrEl = $('<hr>').addClass('').text("")
       $('#card-weather').append(hrEl, fiveDayP);
       
-      for ( let x = 1  ; x <= 40 ; x+=8) {
+      for ( let x = 0  ; x <= 39 ; x+=8) {
       
       let dateWeather = new Date.parse(data.list[x].dt_txt).toString();
       
