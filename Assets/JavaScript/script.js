@@ -47,6 +47,8 @@ function uvDisplay(txtSearchEl) {
       } else if (uvGrade <= 4) {
         
         uvClass.css('background', "#FFFF00");
+        uvClass.css('color', "#000");
+        
       } else if (uvGrade <= 6) {
         
         uvClass.css('background', "#FFA500");

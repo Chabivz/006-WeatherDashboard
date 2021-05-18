@@ -4,7 +4,7 @@
 
 ## Table of Contents
 
-- [About the Project](#about-the-project)
+- [About the Project](X#about-the-project)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Credit](#credit)
@@ -18,7 +18,9 @@
     - [Moments.js](https://momentjs.com/)
     - HTML, CSS, and Javascript
 - When the you typed the City on the Textbox and clicked the Search button the screen will generate today's weather and the 5 day forecast. 
-- 
+- UV Color will change depends on the level of the UV Index,
+    - (0 - 2) Green
+    - (3 - 4)
 
 ## Installation
 
